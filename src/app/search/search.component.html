@@ -1,0 +1,27 @@
+<br>
+<div class="container">
+  <header class="jumbotron">
+    <h2>Weather app <small>type in an address and get the weather</small></h2>
+    <p class="lead">Hope you like the app</p>
+  </header>
+</div><!-- .container -->
+
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="searchWeather()">
+    <div class="form-group">
+      <label>Search</label>
+      <input type="text" class="form-control" name="search" [(ngModel)]="search">
+    </div>
+    <button class="btn btn-primary">Search</button>
+  </form>
+</div><!-- .container -->
+
+<div class="container">
+  <header *ngIf="load">
+    <p class="lead">Loading..</p>
+  </header>
+  <br>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let w of weather.weatherRes">{{w.address}}  | Temperature: {{w.temperature}}</li>
+  </ul>
+</div><!-- .container -->
