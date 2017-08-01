@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, HttpModule } from '@angular/http';
+import { Jsonp, JsonpModule } from '@angular/http';
 import 'rxjs/add/operator/topromise';
 
 @Injectable()
@@ -13,7 +13,7 @@ lng: number;
 apiDarkSky: string;
 temperature: number;
 
-  constructor(private http: Http) {
+  constructor(private jsonp: Jsonp) {
     this.weatherRes = [];
    }
 
@@ -22,8 +22,8 @@ temperature: number;
     let promise = new Promise( (resolve, reject ) => {
 
       this.encodedAddress = encodeURIComponent(address);
-      this.apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.encodedAddress}`;
-      this.http.get(this.apiUrl)
+      this.apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.encodedAddress}&callback=JSONP_CALLBACK`;
+      this.jsonp.request(this.apiUrl)
             .toPromise()
             .then( (res) => {
               this.address = res.json().results[0].formatted_address;
@@ -42,8 +42,8 @@ temperature: number;
   darkSky = () => {
     let  promise = new Promise( (resolve, reject) => {
 
-      this.apiDarkSky = `https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/${this.lat},${this.lng}`;
-      this.http.get(this.apiDarkSky)
+      this.apiDarkSky = `https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/${this.lat},${this.lng}&callback=JSONP_CALLBACK`;
+      this.jsonp.request(this.apiDarkSky)
           .toPromise()
           .then( (res) => {
             this.temperature = res.json().currently.temperature;
