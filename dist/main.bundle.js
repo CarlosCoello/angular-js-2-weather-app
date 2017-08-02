@@ -88,8 +88,7 @@ var GoogleFetch = (function () {
     return GoogleFetch;
 }());
 var WeatherService = (function () {
-    function WeatherService(jsonp, http) {
-        this.jsonp = jsonp;
+    function WeatherService(http) {
         this.http = http;
     }
     WeatherService.prototype.geocodeAddress = function (address) {
@@ -102,17 +101,17 @@ var WeatherService = (function () {
         });
     };
     WeatherService.prototype.darkSky = function (lat, lng) {
-        this.apiDarkSky = "https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/" + lat + "," + lng + "&callback=JSONP_CALLBACK";
-        return this.jsonp.request(this.apiDarkSky).map(function (res) { return res.json(); });
+        this.apiDarkSky = "https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/" + lat + "," + lng;
+        return this.http.get(this.apiDarkSky).map(function (res) { return res.json(); });
     };
     return WeatherService;
 }());
 WeatherService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Jsonp */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Jsonp */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Http */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], WeatherService);
 
-var _a, _b;
+var _a;
 //# sourceMappingURL=weather.service.js.map
 
 /***/ }),
@@ -222,8 +221,7 @@ AppModule = __decorate([
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* JsonpModule */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */]
+            __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */]
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_6__app_weather_service__["a" /* WeatherService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
