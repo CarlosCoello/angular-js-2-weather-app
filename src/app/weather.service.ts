@@ -21,7 +21,7 @@ apiDarkSky: string;
 
    geocodeAddress(address: string): Observable<GoogleFetch[]>{
      this.encodedAddress = encodeURIComponent(address);
-     this.apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.encodedAddress}`;
+     this.apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.encodedAddress}&callback=JSONP_CALLBACK`;
      return this.jsonp.request(this.apiUrl).map( res => {
        return res.json().results.map( x => {
          return new GoogleFetch(
