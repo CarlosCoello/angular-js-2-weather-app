@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Jsonp, JsonpModule } from '@angular/http';
+import { Jsonp, JsonpModule, Http, HttpModule } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -17,12 +17,12 @@ encodedAddress: string;
 apiUrl: string;
 apiDarkSky: string;
 
-  constructor(private jsonp: Jsonp) {}
+  constructor(private jsonp: Jsonp, private http: Http) {}
 
    geocodeAddress(address: string): Observable<GoogleFetch[]>{
      this.encodedAddress = encodeURIComponent(address);
-     this.apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.encodedAddress}&callback=JSONP_CALLBACK`;
-     return this.jsonp.request(this.apiUrl).map( res => {
+     this.apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.encodedAddress}`;
+     return this.http.get(this.apiUrl).map( res => {
        return res.json().results.map( x => {
          return new GoogleFetch(
            x.formatted_address,
