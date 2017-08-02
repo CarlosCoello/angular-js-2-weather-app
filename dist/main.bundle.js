@@ -88,27 +88,27 @@ var GoogleFetch = (function () {
     return GoogleFetch;
 }());
 var WeatherService = (function () {
-    function WeatherService(http) {
-        this.http = http;
+    function WeatherService(jsonp) {
+        this.jsonp = jsonp;
     }
     WeatherService.prototype.geocodeAddress = function (address) {
         this.encodedAddress = encodeURIComponent(address);
-        this.apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.encodedAddress;
-        return this.http.get(this.apiUrl).map(function (res) {
+        this.apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.encodedAddress + "&callback=JSONP_CALLBACK";
+        return this.jsonp.request(this.apiUrl).map(function (res) {
             return res.json().results.map(function (x) {
                 return new GoogleFetch(x.formatted_address, x.geometry.location.lat, x.geometry.location.lng);
             });
         });
     };
     WeatherService.prototype.darkSky = function (lat, lng) {
-        this.apiDarkSky = "https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/" + lat + "," + lng;
-        return this.http.get(this.apiDarkSky).map(function (res) { return res.json(); });
+        this.apiDarkSky = "https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/" + lat + "," + lng + "&callback=JSONP_CALLBACK";
+        return this.jsonp.request(this.apiDarkSky).map(function (res) { return res.json(); });
     };
     return WeatherService;
 }());
 WeatherService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Jsonp */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Jsonp */]) === "function" && _a || Object])
 ], WeatherService);
 
 var _a;
@@ -221,7 +221,7 @@ AppModule = __decorate([
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */]
+            __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* JsonpModule */]
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_6__app_weather_service__["a" /* WeatherService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
