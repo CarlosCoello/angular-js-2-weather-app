@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Jsonp, JsonpModule, Http, HttpModule } from '@angular/http';
+import { Http, HttpModule } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -17,7 +17,7 @@ encodedAddress: string;
 apiUrl: string;
 apiDarkSky: string;
 
-  constructor(private jsonp: Jsonp, private http: Http) {}
+  constructor(private http: Http) {}
 
    geocodeAddress(address: string): Observable<GoogleFetch[]>{
      this.encodedAddress = encodeURIComponent(address);
@@ -34,8 +34,8 @@ apiDarkSky: string;
    }
 
    darkSky(lat, lng){
-     this.apiDarkSky = `https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/${lat},${lng}&callback=JSONP_CALLBACK`;
-     return this.jsonp.request(this.apiDarkSky).map( res => res.json());
+     this.apiDarkSky = `https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/${lat},${lng}`;
+     return this.http.get(this.apiDarkSky).map( res => res.json());
    }
 
 }
