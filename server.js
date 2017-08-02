@@ -9,7 +9,7 @@ app.listen(port, () => {
 });
 
 app.use( express.static(__dirname + '/dist') );
-app.use( cors());
+app.use( cors({origin: 'https://young-sea-76737.herokuapp.com/'}));
 
 const forceSSL = function(){
   return function(req, res, next){
