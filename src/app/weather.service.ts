@@ -35,7 +35,7 @@ apiDarkSky: string;
 
    darkSky(lat, lng){
      this.apiDarkSky = `https://api.darksky.net/forecast/8faa7b95e3a14d8e2f746aba2c2cbecf/${lat},${lng}&callback=JSONP_CALLBACK`;
-     return this.jsonp.get(this.apiDarkSky).map( res => res.json());
+     return this.jsonp.request(this.apiDarkSky).map( res => res.json());
    }
 
 }
