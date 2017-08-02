@@ -23917,9 +23917,9 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* Version */]
 /* unused harmony export ResponseContentType */
 /* unused harmony export ResponseType */
 /* unused harmony export Headers */
-/* unused harmony export Http */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Jsonp; });
-/* unused harmony export HttpModule */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return Http; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Jsonp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return HttpModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonpModule; });
 /* unused harmony export Connection */
 /* unused harmony export ConnectionBackend */
